@@ -122,7 +122,7 @@ index:
         # 首页 banner 区背景图片
         # background-image: "/assets/images/flower.png"
         # background-repeat: "no-repeat"
-        # background-size: "cover"
+        # background-size: "no-cover"
 
 # ---------------- #
 #      Jekyll      #
