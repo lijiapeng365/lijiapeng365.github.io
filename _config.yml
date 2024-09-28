@@ -118,11 +118,11 @@ index:
         # 首页导航栏文字颜色
         nav-color: "rgba(255, 255, 255, .5)"
         # 首页 banner 区背景颜色
-        background-color: "#f9e9ee"
+        background-color: "#FFFFFF00"
         # 首页 banner 区背景图片
         # background-image: "/assets/images/flower.png"
         # background-repeat: "no-repeat"
-        # background-size: "no-cover"
+        # background-size: "cover"
 
 # ---------------- #
 #      Jekyll      #
