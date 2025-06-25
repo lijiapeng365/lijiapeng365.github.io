@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>himbro的小屋</title><meta name="author" content="himbro"><meta name="copyright" content="himbro"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="开源万岁">
+<meta property="og:type" content="website">
+<meta property="og:title" content="himbro的小屋">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="himbro的小屋">
+<meta property="og:description" content="开源万岁">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.jpg">
+<meta property="article:author" content="himbro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'himbro的小屋',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/girl_in_rain.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/girl_in_rain.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.jpg" alt="Logo"><span class="site-name">himbro的小屋</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">himbro的小屋</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/" title="如何关闭windows11家庭版hyper-v以及虚拟化安全性">如何关闭windows11家庭版hyper-v以及虚拟化安全性</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-06-25T00:39:06.000Z" title="发表于 2025-06-25 08:39:06">2025-06-25</time></span></div><div class="content">...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" title="VMware虚拟机无法连接NAT网络模式">VMware虚拟机无法连接NAT网络模式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-06-24T12:22:41.000Z" title="发表于 2025-06-24 20:22:41">2025-06-24</time></span></div><div class="content">...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/26/docker%E5%AE%B9%E5%99%A8%E5%9C%A8windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D-b73873adc5/" title="Docker在Windows平台的部署及使用">Docker在Windows平台的部署及使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-04-26T07:41:34.000Z" title="发表于 2025-04-26 15:41:34">2025-04-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/">softwares</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/docker/">docker</a></span></div><div class="content">Docker在Windows平台的部署及使用一、Docker Desktop在Windows平台上的部署方式（一）前置要求在Windows上使用Docker Desktop依赖WSL 2作为后端运行环境。因此，在安装Docker Desktop之前，您需要先安装WSL 2并配置至少一个Linux发行版（如Ubuntu）。如果您尚未完成此步骤，请参考相关教程完成WSL 2的安装，并确保能够在WSL终端中正常运行Linux命令后，再继续进行Docker Desktop的安装配置。 系统要求如下：  WSL 2后端：WSL版本1.1.3.0或更高版本。Windows 11 64位：Home或Pro 22H2版或更高版本，或Enterprise或Education 22H2版或更高版本。Windows 10 64位：最低要求为Home或Pro 22H2（构建19045）或更高版本，或Enterprise或Education 22H2（构建19045）或更高版本。 Hyper - V后端和Windows容器：开启Hyper - V和容器Windows功能。Windows...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/" title="前端AI生成心得">前端AI生成心得</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-04-23T05:35:13.000Z" title="发表于 2025-04-23 13:35:13">2025-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/%E5%89%8D%E7%AB%AF/">前端</a></span></div><div class="content">使用 AI 辅助前端开发的实践心得一、传统依赖 AI 生成前端代码的困境直接依赖 AI 聊天工具生成前端页面，看似便捷，实则容易陷入反复纠错的困局。AI 输出的代码常常存在逻辑与样式方面的问题。在实际调试过程中，不仅耗时费力，而且很容易让人产生疲惫感，极大地影响开发效率和开发人员的积极性。 二、优化后的高效开发流程 设计稿先行：先用 Figma 完成设计稿。Figma 是一款强大的设计工具，能够帮助我们精准地规划页面布局、样式等。 https://www.figma.com/   利用 MCP 工具：通过 MCP 工具暴露设计稿，并将设计稿截图辅助 AI 明确需求。这样可以让 AI 更清楚我们想要的页面呈现效果，减少理解偏差。   代码生成与迭代：让 AI 根据明确的需求生成代码，之后再进行优化迭代。这种方式能够在一定程度上减少初始代码中的错误，提升开发效率与质量。    三、借助 AI 评估项目增强代码健壮性在开发过程中，每当完成一部分内容，就让 AI 浏览整个项目，评估项目存在的问题，并写入文档。这里有个小技巧，新开一个上下文，让 AI...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/28/%E4%BB%A4%E4%BA%BA%E8%B4%B9%E8%A7%A3%E7%9A%84%E7%BF%BB%E8%AF%91-1/" title="令人费解的翻译-1">令人费解的翻译-1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-28T13:00:56.000Z" title="发表于 2025-03-28 21:00:56">2025-03-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%A6%82%E5%BF%B5/">概念</a></span></div><div class="content">引言在我刚接触AI时，那些高深莫测的词语，一直让我对学习AI有一种抵触。看着那些词语，AI这个词在我的脑海中越发神秘，直到有一天我怀着敬畏的心情，去查阅这些词语，才知道，这些词语的意思简单到不可思议。这其中，有些词语就是乱翻，但也有词语是翻译的准确，但就是让人感到晦涩。 基于此，我决定写这个系列，来为大家搞懂这些晦涩难懂的词语。 鲁棒性 （晦涩程度：极高）鲁棒性（英语：robustness）指事物可以抵御外部应力和影响并维持原有状态的自身性质。简单理解，就是事物在外部干扰下，依然能够维持自身原本的性质，十分坚挺。如果在文章中看到鲁棒性，其实就是说某事物的非常稳定，不易受其他信息影响 维基百科给出了另一个翻译：稳健性。不得不说，这个翻译比什么鲁棒性，好太多了，强烈要求把鲁棒性全部改为稳健性 嵌入...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/22/%E5%8D%8F%E7%A8%8B%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/" title="协程函数与异步操作">协程函数与异步操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-22T09:10:11.000Z" title="发表于 2025-03-22 17:10:11">2025-03-22</time></span></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/20/FastAPI%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0-2%EF%BC%88Websocket%E5%AE%9E%E7%8E%B0%EF%BC%89/" title="FastAPI使用日记-2（Websocket实现）">FastAPI使用日记-2（Websocket实现）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-20T03:16:32.000Z" title="发表于 2025-03-20 11:16:32">2025-03-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/">softwares</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/software-engineering/">software engineering</a></span></div><div class="content">FastAPI的曲折之路FastAPI支持多种传输数据的方式，其中有http响应，以及websocket等等…最开始，我使用的是http模式，直接@app.get 来定义FastAPI接口。我发现，这种模式要求的是，前端发送消息，后端收取消息并响应。我在定义的时候，发现了这种模式在我项目中的局限性。 首先，我的主程序和FastAPI不好解耦，程序逻辑都是写在定义api的语句中，让我后续扩展维护程序带来相当多的麻烦。其次，我无法实现程序与客户端的持续性互动，因为http模式的输入-输出，导致我要固定住处理数据的逻辑，并且只有前端发来数据时，我才能返回数据。 尽管，我找到了一些改进的方法，就是使用FastAPI的依赖注入功能（简单来说，就是API可以定义在一个文件中，然后另一个文件可以通过特定语句导入它，实现api和业务的分离）。但是，前端发送信息，后端就要响应信息这一底层逻辑没有变，使得前后端仍然...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/" title="FastAPI基础以及进阶使用-1">FastAPI基础以及进阶使用-1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-19T04:54:48.000Z" title="发表于 2025-03-19 12:54:48">2025-03-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/">softwares</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/software-engineering/">software engineering</a></span></div><div class="content">初识APIAPI，就是定义了一个外接可以与你设计的程序，进行互动的接口。我们之所以需要API，从产品的设计上讲，一个最大的用处是前后端解耦。想象一下，你设计了一个产品，同时在开发前后端。如果前后端直接一套程序，一块设计，那么代码之间必然是粘合在一块的。假设前端想要改进他的代码，那就不得不考虑会不会对后端造成影响，大大降低了开发效率以及产品的稳定。另一方面，前后端的技术栈是完全不一样的，让他们在一套程序中协调运行，也大大提高了编写程序的难度。如果，我们让前端和后端独立运行，仅要求前后端通过api来通信，那么前端和后端任何改动都不会影响对方，只需要保证通过api发送的数据无误即可 使用FastAPI构建Python项目1. 选择FastAPIFastAPI，说白了就是一个用于构建api的框架，可以方便的开发api接口。相比其他的api开发框架，FastAPI效率更高，且语法简洁，非常适合设计构建现代api服务 2....</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/18/Agno%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" title="短期计划">短期计划</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-18T07:53:33.000Z" title="发表于 2025-03-18 15:53:33">2025-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/">softwares</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/AI/Agno/">Agno</a></span></div><div class="content">目标明确我需要做出的是一个虚拟Vtuber，所以我应当重点关注多模态模型，以及team。当然，所有的信息都是必要的，创建虚拟Vtuber 远远比我想象的要复杂，但是，这就是我所期望的！ 放弃旧项目之前在unity做的项目，所有的代码都在unity中实现（天知道当时我是怎么度过来的！）后面才发现这样做有多不合适。首先，c#中专精ai相关的库远不如python中丰富，同时，大多数agent框架也是基于python的。更何况，将代码编写在unity中，增加了耦合度，无法更换前端（我要是想做一个web端那该咋办）so，使用python重构ai模型逻辑，成为了我现在最需要做的事情 新计划！首先，我需要将之前的Asr+llm+TTS 用python在后端重构，使用的agent框架待定为Agno，通过这种方式熟悉新框架，也是一种尝试。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/18/%E5%88%9D%E8%AF%95Agno/" title="初试Agno，以及踩坑记录">初试Agno，以及踩坑记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-18T07:33:23.000Z" title="发表于 2025-03-18 15:33:23">2025-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/">softwares</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/softwares/AI/Agno/">Agno</a></span></div><div class="content">Agno是什么Agno是一个用来创建agent的开源框架，近期在github中较为火热，star数增长较快 Agno主要是以python语言作为基础的框架，所以需要人对python较为熟悉 Agno文档初探Agno文档较为详细，它甚至将ai嵌入在了文档中，用户可以通过与Agno文档中的AI交互，快速解决实践中的问题 Agno踩坑记录–废弃在使用Agno创建最简单的agent时，我使用阿里百炼平台提供的qwen模型，通过openai兼容接口接入Agno框架，但是一直存在报错，报错信息显示Agno框架向阿里的服务器发送的请求不符合open...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">himbro</div><div class="author-info-description">开源万岁</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lijiapeng365"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/" title="如何关闭windows11家庭版hyper-v以及虚拟化安全性">如何关闭windows11家庭版hyper-v以及虚拟化安全性</a><time datetime="2025-06-25T00:39:06.000Z" title="发表于 2025-06-25 08:39:06">2025-06-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" title="VMware虚拟机无法连接NAT网络模式">VMware虚拟机无法连接NAT网络模式</a><time datetime="2025-06-24T12:22:41.000Z" title="发表于 2025-06-24 20:22:41">2025-06-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/26/docker%E5%AE%B9%E5%99%A8%E5%9C%A8windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D-b73873adc5/" title="Docker在Windows平台的部署及使用">Docker在Windows平台的部署及使用</a><time datetime="2025-04-26T07:41:34.000Z" title="发表于 2025-04-26 15:41:34">2025-04-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/" title="前端AI生成心得">前端AI生成心得</a><time datetime="2025-04-23T05:35:13.000Z" title="发表于 2025-04-23 13:35:13">2025-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/28/%E4%BB%A4%E4%BA%BA%E8%B4%B9%E8%A7%A3%E7%9A%84%E7%BF%BB%E8%AF%91-1/" title="令人费解的翻译-1">令人费解的翻译-1</a><time datetime="2025-03-28T13:00:56.000Z" title="发表于 2025-03-28 21:00:56">2025-03-28</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/"><span class="card-category-list-name">AI</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/softwares/"><span class="card-category-list-name">softwares</span><span class="card-category-list-count">5</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/softwares/AI/"><span class="card-category-list-name">AI</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/softwares/AI/Agno/"><span class="card-category-list-name">Agno</span><span class="card-category-list-count">2</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/softwares/docker/"><span class="card-category-list-name">docker</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/softwares/software-engineering/"><span class="card-category-list-name">software engineering</span><span class="card-category-list-count">2</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">机器学习</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/Windows11/" style="font-size: 1.1em; color: #999">Windows11</a> <a href="/tags/%E7%A7%91%E6%99%AE/" style="font-size: 1.1em; color: #999">科普</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/software/" style="font-size: 1.3em; color: #99a1ac">software</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/figma/" style="font-size: 1.1em; color: #999">figma</a> <a href="/tags/websocket/" style="font-size: 1.1em; color: #999">websocket</a> <a href="/tags/API/" style="font-size: 1.3em; color: #99a1ac">API</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/" style="font-size: 1.1em; color: #999">虚拟化安全性</a> <a href="/tags/AI/" style="font-size: 1.5em; color: #99a9bf">AI</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">机器学习</a> <a href="/tags/Windows/" style="font-size: 1.1em; color: #999">Windows</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">前端</a> <a href="/tags/Agno/" style="font-size: 1.3em; color: #99a1ac">Agno</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 1.1em; color: #999">虚拟机</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              六月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              四月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              三月 2025
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">10</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-06-25T05:46:08.832Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By himbro</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, {"loop":true,"startDelay":300,"typeSpeed":150,"backSpeed":50}))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["自小刺头深草里，而今渐觉出蓬蒿","时人不识凌云木，直待凌云始道高"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["自小刺头深草里，而今渐觉出蓬蒿","时人不识凌云木，直待凌云始道高"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

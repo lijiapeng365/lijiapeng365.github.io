@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>如何关闭windows11家庭版hyper-v以及虚拟化安全性</title>
+      <link href="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/"/>
+      <url>/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/</url>
+      
+        <content type="html"><![CDATA[<h2 id="微软你坏事做尽！"><a href="#微软你坏事做尽！" class="headerlink" title="微软你坏事做尽！"></a>微软你坏事做尽！</h2><p>正在折腾VMware虚拟机，无法开启cpu虚拟化，导致虚拟机的性能骤降。在开启时出现错误提示：此平台不支持虚拟化，我？？？</p><p>后来经过网络搜索，是微软有关hyper-v和虚拟化安全性相关设置导致。不过，微软家庭版按照道理来说，是不提供hyper-v的。所以，在windows功能选项中，仅能关闭虚拟机平台以及其他和虚拟机相关的，寥寥无几的选项。但是，hyper-v实际上在家庭版上是默认开启的，包括wsl之类的功能是依赖hyper-v的（微软笑话）</p><p>另外，windows系统中的虚拟化安全性可以在组策略中关闭，但仅限专业版！（专业版关闭方法自行上网查阅）尼玛家庭版不是阉割了这个功能，而是阉割了关闭这个功能的开关，微软真有你的</p><h2 id="如何关闭"><a href="#如何关闭" class="headerlink" title="如何关闭"></a>如何关闭</h2><p>首先，hyper-v的关闭还是比较简单的。先是按照网络提供的方法，把能够关闭的虚拟机相关设置关闭</p><p><img src="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/d9c32f8b-87c4-4315-8f8e-4794dad8b14a.png" alt="d9c32f8b-87c4-4315-8f8e-4794dad8b14a"></p><p><img src="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/b45741d8-ef18-42c3-9856-211e9cc2ab7f.png" alt="b45741d8-ef18-42c3-9856-211e9cc2ab7f"></p><p><img src="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/e654c5c0-0322-4545-9935-6ad0dcd4ab9f.png" alt="e654c5c0-0322-4545-9935-6ad0dcd4ab9f"></p><p>然后在输入框中输入服务</p><p><img src="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/2e89c454-cce8-4123-8234-7771b3d0658a.png" alt="2e89c454-cce8-4123-8234-7771b3d0658a"></p><p>关闭hyper-v相关服务（双击服务进入选项卡，将启动类型改为禁用）</p><p><img src="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/bc5344f2-5be1-4641-883e-ff3a08b14598.png" alt="bc5344f2-5be1-4641-883e-ff3a08b14598"></p><p><img src="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/2988c12a-094e-4b94-9b59-4383a2cd61c0.png" alt="2988c12a-094e-4b94-9b59-4383a2cd61c0"></p><p>hyper-v随之关闭。当然，已经启动的服务不会马上关闭，不过不用担心，之后重启电脑会关闭的，如果不放心可以右键正在运行的hyper-v服务选择停止</p><p>然后，咱们来关闭虚拟化安全性</p><p>去微软官网下载Guard 和 Credential Guard工具，<a href="https://www.microsoft.com/en-us/download/details.aspx?id=53337">Download Device Guard and Credential Guard hardware readiness tool from Official Microsoft Download Center</a>  </p><p><strong>打开PowerShell（管理员模式），输入 set-ExecutionPolicy RemoteSigned ，选择y</strong>  </p><p><strong>cd到解压后的路径下，然后输入.\DG_Readiness_Tool_v3.6.ps1 -Disable，执行该程序</strong></p><p>（注意，最后一步，系统可能给出未找到注册项之类的异常输出，但这是正常情况，是否成功还要看下一步）</p><p>重启电脑，电脑应该会显示正在更新。更新后电脑会自动进入一个黑底白字的界面。如果是，按三次F3，电脑会自动进入桌面</p><p>如果不是，那恐怕上一步并没有成功（希望你不会碰到！）</p><p>如果执行成功，那么，虚拟机可以启动cpu虚拟化功能了！</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Windows11 </tag>
+            
+            <tag> 虚拟机 </tag>
+            
+            <tag> 虚拟化安全性 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VMware虚拟机无法连接NAT网络模式</title>
+      <link href="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<p>VMware虚拟机连接网络，有一个很常用的模式是NAT网络，但是在Clash开启TUN模式后，会发现网络无法正常连接，问题出现在哪里呢？</p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>先说结论，问题出现在VMware自己的默认设置上！Clash的TUN模式本质上不会破坏虚拟机的NAT模式网络连接，但是在TUN开启的情况下，VMware不会自动新建NAT网络类型。然而，虚拟机在创建时会默认使用NAT连接方式（明明没有这个网络类型还要硬连，VMware你到底有没有考虑过小白的感受）然后就会发现，虚拟机根本就连不上网（悲）</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>有两种解决方式</p><ol><li><p>可以直接新建一个NAT网络类型。第一步，点击编辑</p><p><img src="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/2d9cd8a2-7417-4430-82d9-5d61338ca358.png" alt="2d9cd8a2-7417-4430-82d9-5d61338ca358"></p><p>然后再点击虚拟网络编辑器</p><p><img src="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/717ecd02-beff-4437-8aa7-6b38c12bcb75.png" alt="717ecd02-beff-4437-8aa7-6b38c12bcb75"></p><p>点击更改设置</p><p><img src="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/f4b3f839-bb8d-4eba-b71d-7dec4ccb0d2f.png" alt="f4b3f839-bb8d-4eba-b71d-7dec4ccb0d2f"></p><p>然后点击添加网络，注意添加的网络是NAT类型即可</p><p><img src="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/13acd1c8-a7ca-4109-b76b-640b20115f65.png" alt="13acd1c8-a7ca-4109-b76b-640b20115f65"></p><p>（实际上目前网络应该没有NAT类型，不过我这里为了方便就直接展示了，添加新网络后点击它，并且勾选NAT模式即可）</p></li><li><p>第二种方法，直接关闭TUN，然后依照上面的步骤打开虚拟网络编辑器，不过我们不要手动添加网络，而是直接点击下面的还原默认设置</p><p><img src="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/e27c1eee-3804-444b-9190-76e2e8929cda.png" alt="e27c1eee-3804-444b-9190-76e2e8929cda"></p><p>等待设置还原后，点击确定来关闭这个窗口</p><p>然后虚拟机可以上网了。如果你需要TUN模式，直接打开就行了，现在你无论开启还是不开启TUN，都不会影响你的虚拟机网络连接！不过要注意，这时候不要再动网络设置了哦</p></li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Docker在Windows平台的部署及使用</title>
+      <link href="/2025/04/26/docker%E5%AE%B9%E5%99%A8%E5%9C%A8windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D-b73873adc5/"/>
+      <url>/2025/04/26/docker%E5%AE%B9%E5%99%A8%E5%9C%A8windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D-b73873adc5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Docker在Windows平台的部署及使用"><a href="#Docker在Windows平台的部署及使用" class="headerlink" title="Docker在Windows平台的部署及使用"></a>Docker在Windows平台的部署及使用</h1><h2 id="一、Docker-Desktop在Windows平台上的部署方式"><a href="#一、Docker-Desktop在Windows平台上的部署方式" class="headerlink" title="一、Docker Desktop在Windows平台上的部署方式"></a>一、Docker Desktop在Windows平台上的部署方式</h2><h3 id="（一）前置要求"><a href="#（一）前置要求" class="headerlink" title="（一）前置要求"></a>（一）前置要求</h3><p>在Windows上使用Docker Desktop依赖WSL 2作为后端运行环境。因此，在安装Docker Desktop之前，您需要先安装WSL 2并配置至少一个Linux发行版（如Ubuntu）。如果您尚未完成此步骤，请参考相关教程完成WSL 2的安装，并确保能够在WSL终端中正常运行Linux命令后，再继续进行Docker Desktop的安装配置。</p><p>系统要求如下：</p><ul><li><strong>WSL 2后端</strong>：WSL版本1.1.3.0或更高版本。Windows 11 64位：Home或Pro 22H2版或更高版本，或Enterprise或Education 22H2版或更高版本。Windows 10 64位：最低要求为Home或Pro 22H2（构建19045）或更高版本，或Enterprise或Education 22H2（构建19045）或更高版本。</li><li><strong>Hyper - V后端和Windows容器</strong>：开启Hyper - V和容器Windows功能。Windows 10或Windows 11上成功运行客户端Hyper - V需要满足以下硬件先决条件：具有二级地址转换 (SLAT) 功能的64位处理器，4GB系统内存，在BIOS&#x2F;UEFI设置中开启BIOS&#x2F;UEFI级别的硬件虚拟化支持。</li></ul><h3 id="（二）安装步骤"><a href="#（二）安装步骤" class="headerlink" title="（二）安装步骤"></a>（二）安装步骤</h3><ol><li><strong>下载Docker Desktop</strong>：访问Docker官网：<a href="https://www.docker.com/%EF%BC%8C%E7%82%B9%E5%87%BB%E9%A1%B5%E9%9D%A2%E4%B8%8A%E7%9A%84%E2%80%9CDownload">https://www.docker.com/，点击页面上的“Download</a> for Windows - AMD64”按钮，以下载适用于Windows系统的Docker Desktop安装文件。</li><li><strong>安装Docker Desktop</strong>：双击下载的安装文件，开始安装Docker Desktop。按照安装向导的指示完成安装。在安装过程中，将提示安装WSL 2，建议勾选此选项以获得更好的性能。</li><li><strong>配置Docker Desktop</strong>：安装完成后，启动Docker Desktop。首次打开时，将出现Docker订阅协议，点击 <code>Accept</code>（接受）以继续。随后，系统将提示用户登录，您可以选择使用GitHub账户或Google账户登录，若无上述账户，可选择跳过登录步骤。接下来，将出现调查问卷，您可以根据个人喜好选择填写，或直接跳过此步骤。最后，Docker Desktop将正常启动。</li></ol><h3 id="（三）汉化（可选）"><a href="#（三）汉化（可选）" class="headerlink" title="（三）汉化（可选）"></a>（三）汉化（可选）</h3><p>若想使Docker Desktop显示中文界面，可按照以下步骤进行汉化：</p><ol><li>下载对应版本的中文语言包：访问GitHub，下载适用于Docker Desktop的中文语言包，链接地址为：DockerDesktop - CN。将下载的文件解压至 <code>C:\Program Files\Docker</code> 目录下（即Docker的安装根目录）。</li><li>检查Docker Desktop版本：启动Docker Desktop，版本号将在右下角显示。</li><li>备份并替换app.asar文件：打开Docker Desktop中文语言包，选择与您Docker版本相符的 <code>app.asar</code> 文件并复制。导航至Docker的安装目录，路径默认为：<code>C:\Program Files\Docker\Docker\frontend\resources</code>，在该目录下找到 <code>app.asar</code> 文件，建议先备份原文件，然后将复制的中文语言包中的 <code>app.asar</code> 文件粘贴并替换原有文件。</li><li>重新启动Docker Desktop：完成替换后，请关闭Docker Desktop，然后重新启动该程序。此时，Docker Desktop应该以中文界面显示。</li></ol><h3 id="（四）报错处理（WSL更新失败）"><a href="#（四）报错处理（WSL更新失败）" class="headerlink" title="（四）报错处理（WSL更新失败）"></a>（四）报错处理（WSL更新失败）</h3><p>打开Docker Desktop后若出现警告，表明Docker Desktop在WSL更新时失败，系统无法找到WSL。这通常是由于Windows版本较低，导致WSL兼容性问题，建议升级Windows以解决该问题。具体解决方案如下：</p><ol><li><strong>检查Windows版本</strong>：在PowerShell或运行（Win + R）输入：<code>winver</code>。WSL 2需要至少满足22H2或更高版本。</li><li><strong>手动升级Windows</strong>：访问Windows 11安装助手官网 ，点击 <code>立即下载</code>。根据系统提示，依次完成下载、安装和重启，直至升级完成，请勿中断操作。</li><li><strong>手动更新WSL</strong>：Windows更新完毕后，以管理员身份运行 <code>PowerShell</code> 执行：<code>wsl --update</code>。如果一切正常，然后运行 <code>wsl --version</code>，若能正常显示版本信息，说明WSL已成功更新。</li><li><strong>重新启动Docker Desktop</strong>：重新启动Docker Desktop后可以看到不再弹出报错。</li></ol><h2 id="二、常用的Docker概念"><a href="#二、常用的Docker概念" class="headerlink" title="二、常用的Docker概念"></a>二、常用的Docker概念</h2><h3 id="（一）镜像（Image）"><a href="#（一）镜像（Image）" class="headerlink" title="（一）镜像（Image）"></a>（一）镜像（Image）</h3><p>Docker的镜像概念类似于虚拟机里的镜像（比如.ISO文件），是一个只读的模板，一个独立的文件系统，包括运行容器所需的数据，可以用来创建新的容器。例如，一个镜像可以包含一个完整的Ubuntu操作系统环境，里面仅安装了MySQL或用户需要的其它应用程序。</p><p>镜像不包含任何动态数据，其内容在构建之后也不会被改变。Docker设计时，充分利用Union FS的技术，将其设计为分层存储的架构。镜像实际是由多层文件系统联合组成，构建时会一层层构建，前一层是后一层的基础，每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。分层存储的特征还使得镜像的复用、定制变的更为容易，甚至可以用之前构建好的镜像作为基础层，然后进一步添加新的层，以定制自己所需的内容，构建新的镜像。</p><h3 id="（二）容器（Container）"><a href="#（二）容器（Container）" class="headerlink" title="（二）容器（Container）"></a>（二）容器（Container）</h3><p>Docker容器是由Docker镜像创建的运行实例，类似VM虚拟机，支持启动，停止，删除等。每个容器间是相互隔离的，容器中会运行特定的应用，包含特定应用的代码及所需的依赖文件。可以把容器看做是一个轻量级的Linux运行环境（包括root用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。</p><p>容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。按照Docker最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。</p><h3 id="（三）仓库（Repository）"><a href="#（三）仓库（Repository）" class="headerlink" title="（三）仓库（Repository）"></a>（三）仓库（Repository）</h3><p>镜像便于传播，而仓库就是专门用来传播这些镜像的地方，有点类似于Github，或者可以把它看成一个存放各种镜像的镜像商店。一个Docker Registry中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。我们可以通过&lt;仓库名&gt;:&lt;标签&gt;的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 <code>latest</code> 作为默认标签。</p><p>Docker Registry分为公开服务和私有服务。Docker Registry公开服务是开放给用户使用、允许用户管理镜像的Registry服务，一般这类公开服务允许用户免费上传、下载公开的镜像，并可能提供收费服务供用户管理私有镜像。最常使用的Registry公开服务是官方的Docker Hub ，这也是默认的Registry，并拥有大量的高质量镜像。</p><h2 id="三、常用的Docker命令"><a href="#三、常用的Docker命令" class="headerlink" title="三、常用的Docker命令"></a>三、常用的Docker命令</h2><h3 id="（一）容器生命周期管理命令"><a href="#（一）容器生命周期管理命令" class="headerlink" title="（一）容器生命周期管理命令"></a>（一）容器生命周期管理命令</h3><ol><li><strong>docker run</strong>：创建并启动一个新的容器。例如 <code>docker run -d ubuntu</code> ，<code>-d</code> 表示在后台运行容器。</li><li><strong>docker start&#x2F;stop&#x2F;restart</strong>：分别用于启动、停止和重启容器。如 <code>docker start container_name</code> 启动指定名称的容器。</li><li><strong>docker kill</strong>：立即终止一个或多个正在运行的容器。例如 <code>docker kill container_id</code> 。</li><li><strong>docker rm</strong>：用于删除一个或多个已经停止的容器。如 <code>docker rm container_id</code> 删除指定ID的容器。</li><li><strong>docker pause&#x2F;unpause</strong>：暂停和恢复容器中的所有进程。</li><li><strong>docker create</strong>：创建一个新的容器，但不会启动它。</li><li><strong>docker exec</strong>：在运行中的容器内执行一个新的命令。例如 <code>docker exec -it container_name bash</code> ，<code>-it</code> 表示以交互模式进入容器。</li><li><strong>docker rename</strong>：重命名容器。</li></ol><h3 id="（二）容器操作命令"><a href="#（二）容器操作命令" class="headerlink" title="（二）容器操作命令"></a>（二）容器操作命令</h3><ol><li><strong>docker ps</strong>：列出Docker容器。<code>docker ps</code> 列出正在运行的容器，<code>docker ps -a</code> 列出所有容器（包括已停止的容器）。</li><li><strong>docker inspect</strong>：获取Docker对象（容器、镜像、卷、网络等）的详细信息。</li><li><strong>docker top</strong>：显示指定容器中的正在运行的进程。</li><li><strong>docker attach</strong>：允许用户附加到正在运行的容器并与其交互。</li><li><strong>docker events</strong>：获取Docker守护进程生成的事件。</li><li><strong>docker logs</strong>：获取和查看容器的日志输出。如 <code>docker logs container_name</code> 查看指定容器的日志。</li><li><strong>docker wait</strong>：允许用户等待容器停止并获取其退出代码。</li><li><strong>docker export</strong>：将容器的文件系统导出为tar归档文件。</li><li><strong>docker port</strong>：显示容器的端口映射信息。</li><li><strong>docker stats</strong>：实时显示Docker容器的资源使用情况。</li><li><strong>docker update</strong>：更新Docker容器的资源限制，包括内存、CPU等。</li></ol><h3 id="（三）容器的root文件系统（rootfs）命令"><a href="#（三）容器的root文件系统（rootfs）命令" class="headerlink" title="（三）容器的root文件系统（rootfs）命令"></a>（三）容器的root文件系统（rootfs）命令</h3><ol><li><strong>docker commit</strong>：允许用户将容器的当前状态保存为新的Docker镜像。</li><li><strong>docker cp</strong>：用于在容器和宿主机之间复制文件或目录。</li><li><strong>docker diff</strong>：显示Docker容器文件系统的变更。</li></ol><h3 id="（四）镜像仓库命令"><a href="#（四）镜像仓库命令" class="headerlink" title="（四）镜像仓库命令"></a>（四）镜像仓库命令</h3><ol><li><strong>docker login&#x2F;logout</strong>：管理Docker客户端与Docker注册表的身份验证。</li><li><strong>docker pull</strong>：从Docker注册表（例如Docker Hub）中拉取（下载）镜像到本地。如 <code>docker pull ubuntu</code> 下载Ubuntu镜像。</li><li><strong>docker push</strong>：将本地构建的Docker镜像推送（上传）到Docker注册表（如Docker Hub或私有注册表）。</li><li><strong>docker search</strong>：用于在Docker Hub或其他注册表中搜索镜像。例如 <code>docker search mysql</code> 搜索MySQL相关镜像。</li></ol><h3 id="（五）本地镜像管理命令"><a href="#（五）本地镜像管理命令" class="headerlink" title="（五）本地镜像管理命令"></a>（五）本地镜像管理命令</h3><ol><li><strong>docker images</strong>：列出本地的Docker镜像。</li><li><strong>docker rmi</strong>：删除不再需要的镜像。如 <code>docker rmi image_id</code> 删除指定ID的镜像。</li><li><strong>docker tag</strong>：创建本地镜像的别名（tag）。</li><li><strong>docker build</strong>：从Dockerfile构建Docker镜像。例如 <code>docker build -t my - image .</code> ，<code>-t</code> 为镜像指定标签。</li><li><strong>docker history</strong>：查看指定镜像的历史层信息。</li><li><strong>docker save</strong>：将一个或多个Docker镜像保存到一个tar归档文件中。</li><li><strong>docker load</strong>：从由 <code>docker save</code> 命令生成的tar文件中加载Docker镜像。</li><li><strong>docker import</strong>：从一个tar文件或URL导入容器快照，从而创建一个新的Docker镜像。</li></ol><h3 id="（六）其他命令"><a href="#（六）其他命令" class="headerlink" title="（六）其他命令"></a>（六）其他命令</h3><ol><li><strong>docker info</strong>：显示Docker的系统级信息，包括当前的镜像和容器数量。</li><li><strong>docker version</strong>：显示Docker客户端和服务端的版本信息。</li></ol><h2 id="四、Docker-Compose及相关命令"><a href="#四、Docker-Compose及相关命令" class="headerlink" title="四、Docker Compose及相关命令"></a>四、Docker Compose及相关命令</h2><h3 id="（一）Docker-Compose简介"><a href="#（一）Docker-Compose简介" class="headerlink" title="（一）Docker Compose简介"></a>（一）Docker Compose简介</h3><p>Docker Compose是一个用于定义和运行多个Docker容器的工具，通过一个YAML文件来配置应用程序的服务、网络和卷等信息，并且可以一键启动、停止和管理整个应用程序。它简化了多容器应用的部署和管理，适用于开发、测试、生产等各种环境。</p><h3 id="（二）常用命令"><a href="#（二）常用命令" class="headerlink" title="（二）常用命令"></a>（二）常用命令</h3><ol><li><strong>启动和停止服务</strong><ul><li><strong>docker-compose up</strong>：前台启动项目中的所有服务；<code>docker-compose up -d</code> 后台启动所有服务并在后台运行。</li><li><strong>docker-compose stop</strong>：停止所有服务；<code>docker-compose stop service_name</code> 停止指定服务的容器。</li><li><strong>docker-compose restart</strong>：重启工程中所有服务的容器；<code>docker-compose restart service_name</code> 重启指定服务的容器。</li><li><strong>docker-compose start</strong>：启动工程中所有服务的容器；<code>docker-compose start service_name</code> 启动指定服务的容器。</li></ul></li><li><strong>构建和重构服务</strong><ul><li><strong>docker-compose build</strong>：构建服务的镜像。</li><li><strong>docker-compose up –build</strong>：如果服务镜像不存在，则构建镜像并启动服务。</li><li><strong>docker-compose up –force-recreate</strong>：重构服务。</li></ul></li><li><strong>查看服务信息</strong><ul><li><strong>docker-compose ps</strong>：查看项目中所有服务的信息。</li><li><strong>docker-compose logs</strong>：查看容器的日志；<code>docker-compose logs -f</code> 跟踪日志输出；<code>docker-compose logs --no-color</code> 关闭颜色显示；<code>docker-compose logs service_name</code> 查看指定服务的日志。</li><li><strong>docker-compose exec service_name command</strong>：在服务镜像的容器中执行命令。</li></ul></li><li><strong>删除所有容器</strong><ul><li><strong>docker-compose down</strong>：删除服务容器（容器）。默认不会删除数据卷，如果想同时删除与容器关联的数据卷，可以加上 <code>-v</code> 参数；要删除为服务构建的镜像，可以使用 <code>--rmi all</code>（删除所有与服务关联的镜像）或 <code>--rmi local</code>（仅删除本地构建的镜像）。</li></ul></li><li><strong>在指定容器上执行命令</strong><ul><li><strong>docker-compose run service_name command</strong>：在指定服务容器上执行一个命令。例如 <code>docker-compose run nginx echo &quot;helloworld&quot;</code> 。</li></ul></li><li><strong>进入指定容器</strong><ul><li><strong>docker-compose exec service_name bash</strong>：进入工程中指定服务的容器；当一个服务拥有多个容器时，可通过 <code>--index</code> 参数进入到该服务下的任何容器，如 <code>docker-compose exec --index=1 nginx bash</code> 。</li></ul></li><li><strong>暂停和恢复服务容器</strong><ul><li><strong>docker-compose pause</strong>：暂停工程中所有服务的容器；<code>docker-compose pause service_name</code> 暂停指定服务的容器。</li><li><strong>docker-compose unpause</strong>：恢复工程中所有服务的容器；<code>docker-compose unpause service_name</code> 恢复指定服务的容器。</li></ul></li><li><strong>扩容缩容</strong><ul><li><strong>docker-compose scale service_name&#x3D;num</strong>：例如 <code>docker-compose scale taskmanager=5</code> 。也可以使用 <code>docker-compose up --scale web=5 -d</code> 。</li></ul></li></ol><p>通过以上介绍，您可以在Windows平台上使用Docker Desktop部署容器，并掌握常用的Docker概念、命令以及Docker Compose的使用方法，从而更高效地进行容器化应用的开发和管理。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> softwares </category>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Windows </tag>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>前端AI生成心得</title>
+      <link href="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/"/>
+      <url>/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用-AI-辅助前端开发的实践心得"><a href="#使用-AI-辅助前端开发的实践心得" class="headerlink" title="使用 AI 辅助前端开发的实践心得"></a>使用 AI 辅助前端开发的实践心得</h1><h2 id="一、传统依赖-AI-生成前端代码的困境"><a href="#一、传统依赖-AI-生成前端代码的困境" class="headerlink" title="一、传统依赖 AI 生成前端代码的困境"></a>一、传统依赖 AI 生成前端代码的困境</h2><p>直接依赖 AI 聊天工具生成前端页面，看似便捷，实则容易陷入反复纠错的困局。AI 输出的代码常常存在逻辑与样式方面的问题。在实际调试过程中，不仅耗时费力，而且很容易让人产生疲惫感，极大地影响开发效率和开发人员的积极性。</p><h2 id="二、优化后的高效开发流程"><a href="#二、优化后的高效开发流程" class="headerlink" title="二、优化后的高效开发流程"></a>二、优化后的高效开发流程</h2><ol><li><p><strong>设计稿先行</strong>：先用 Figma 完成设计稿。Figma 是一款强大的设计工具，能够帮助我们精准地规划页面布局、样式等。</p><p><a href="https://www.figma.com/">https://www.figma.com/</a></p><p><img src="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/image-20250423133817939.png" alt="1"></p></li><li><p><strong>利用 MCP 工具</strong>：通过 MCP 工具暴露设计稿，并将设计稿截图辅助 AI 明确需求。这样可以让 AI 更清楚我们想要的页面呈现效果，减少理解偏差。</p><p><img src="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/image-20250423133918405.png" alt="2"></p></li><li><p><strong>代码生成与迭代</strong>：让 AI 根据明确的需求生成代码，之后再进行优化迭代。这种方式能够在一定程度上减少初始代码中的错误，提升开发效率与质量。</p><p><img src="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/image-20250423134049947.png" alt="3"></p></li></ol><h2 id="三、借助-AI-评估项目增强代码健壮性"><a href="#三、借助-AI-评估项目增强代码健壮性" class="headerlink" title="三、借助 AI 评估项目增强代码健壮性"></a>三、借助 AI 评估项目增强代码健壮性</h2><p>在开发过程中，每当完成一部分内容，就让 AI 浏览整个项目，评估项目存在的问题，并写入文档。这里有个小技巧，新开一个上下文，让 AI 丢失以前的记忆，以第三方视角评估项目。这样可以显著增强代码的健壮性和可扩展能力。例如在我的项目中，通过这个方法成功地将原本混乱的 “屎山代码” 进行了逆转，代码的健壮性和可扩展性都大幅提高。</p><p><img src="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/image-20250423134114056.png" alt="4"></p><h2 id="四、后端开发的-AI-应用思路迁移"><a href="#四、后端开发的-AI-应用思路迁移" class="headerlink" title="四、后端开发的 AI 应用思路迁移"></a>四、后端开发的 AI 应用思路迁移</h2><p>后端开发同样可以借鉴前端的思路。使用 AI 不断总结项目存在的问题并写入文档，之后再把文档交给 AI，让它逐条解决。通过这种方式，利用 AI 的分析能力，辅助我们更高效地完成前后端开发任务，打造出更优质、更具扩展性的项目。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> 前端 </tag>
+            
+            <tag> figma </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>令人费解的翻译-1</title>
+      <link href="/2025/03/28/%E4%BB%A4%E4%BA%BA%E8%B4%B9%E8%A7%A3%E7%9A%84%E7%BF%BB%E8%AF%91-1/"/>
+      <url>/2025/03/28/%E4%BB%A4%E4%BA%BA%E8%B4%B9%E8%A7%A3%E7%9A%84%E7%BF%BB%E8%AF%91-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在我刚接触AI时，那些高深莫测的词语，一直让我对学习AI有一种抵触。看着那些词语，AI这个词在我的脑海中越发神秘，直到有一天我怀着敬畏的心情，去查阅这些词语，才知道，这些词语的意思简单到不可思议。这其中，有些词语就是乱翻，但也有词语是翻译的准确，但就是让人感到晦涩。</p><p>基于此，我决定写这个系列，来为大家搞懂这些晦涩难懂的词语。</p><h2 id="鲁棒性-（晦涩程度：极高）"><a href="#鲁棒性-（晦涩程度：极高）" class="headerlink" title="鲁棒性 （晦涩程度：极高）"></a>鲁棒性 （晦涩程度：极高）</h2><p><strong>鲁棒性</strong>（英语：robustness）指事物可以抵御外部<a href="https://zh.wikipedia.org/wiki/%E5%BA%94%E5%8A%9B">应力</a>和影响并维持原有状态的自身性质。简单理解，就是事物在外部干扰下，依然能够维持自身原本的性质，十分坚挺。如果在文章中看到鲁棒性，其实就是说某事物的非常稳定，不易受其他信息影响</p><p>维基百科给出了另一个翻译：稳健性。不得不说，这个翻译比什么鲁棒性，好太多了，强烈要求把鲁棒性全部改为稳健性</p><h2 id="嵌入-（晦涩程度：低）"><a href="#嵌入-（晦涩程度：低）" class="headerlink" title="嵌入 （晦涩程度：低）"></a>嵌入 （晦涩程度：低）</h2><p>数学上，<strong>嵌入</strong>是指一个数学结构经映射包含到另一个结构中。在AI领域可以理解为：离散的符号（如单词、类别）映射到连续的向量空间，并保留它们的语义或关联性。简单说就是将原来的数据，转化为向量。举个例子，如果大模型处理的是文本，那么他的<strong>嵌入</strong>就是将文本转化为向量。</p><p>这个词语翻译的是正确的，不过在AI领域，他的意义是更具体的，对于零门槛的人来说，光看嵌入二字可能难以理解。</p><h2 id="正则化-（晦涩程度：中）"><a href="#正则化-（晦涩程度：中）" class="headerlink" title="正则化 （晦涩程度：中）"></a>正则化 （晦涩程度：中）</h2><p><strong>正则化</strong>（英语：regularization），其实也可以翻译为规则化。其实就是给损失函数加上一些限制，通过这种规则去规范他们再接下来的循环迭代中，不要自我膨胀。简单说，就是给原有的处理方式增加一个规则，或者说约束，以此来解决一些问题（这些问题通常和稳定性差，过拟合相关）</p><p>这个翻译不能说错，但我还是更喜欢规则化这个翻译，因为我自己不知道正则是什么意思（可能是我数学语文都不好hh）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+          <category> 概念 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 科普 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>协程函数与异步操作</title>
+      <link href="/2025/03/22/%E5%8D%8F%E7%A8%8B%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/"/>
+      <url>/2025/03/22/%E5%8D%8F%E7%A8%8B%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>FastAPI使用日记-2（Websocket实现）</title>
+      <link href="/2025/03/20/FastAPI%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0-2%EF%BC%88Websocket%E5%AE%9E%E7%8E%B0%EF%BC%89/"/>
+      <url>/2025/03/20/FastAPI%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0-2%EF%BC%88Websocket%E5%AE%9E%E7%8E%B0%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h2 id="FastAPI的曲折之路"><a href="#FastAPI的曲折之路" class="headerlink" title="FastAPI的曲折之路"></a>FastAPI的曲折之路</h2><p>FastAPI支持多种传输数据的方式，其中有http响应，以及websocket等等…最开始，我使用的是http模式，直接@app.get 来定义FastAPI接口。我发现，这种模式要求的是，前端发送消息，后端收取消息并响应。我在定义的时候，发现了这种模式在我项目中的局限性。</p><p>首先，我的主程序和FastAPI不好解耦，程序逻辑都是写在定义api的语句中，让我后续扩展维护程序带来相当多的麻烦。其次，我无法实现程序与客户端的持续性互动，因为http模式的输入-输出，导致我要固定住处理数据的逻辑，并且只有前端发来数据时，我才能返回数据。</p><p>尽管，我找到了一些改进的方法，就是使用FastAPI的依赖注入功能（简单来说，就是API可以定义在一个文件中，然后另一个文件可以通过特定语句导入它，实现api和业务的分离）。但是，前端发送信息，后端就要响应信息这一底层逻辑没有变，使得前后端仍然 “藕断丝连”</p><h2 id="新思路的探索"><a href="#新思路的探索" class="headerlink" title="新思路的探索"></a>新思路的探索</h2><p>随即，我查阅到了FastAPI的另一种连接模式：websocket。websocket是一种双向通信模式，前端和后端可以通过websocket，维持长连接。相比于http模式，websocket的长连接更符合我的程序需求。这是，我想到，如果使用内存作为API和主程序的桥梁呢？websocket维持长连接，而内存则负责向我的主程序共享数据。这样的话，我的业务逻辑就能和API解耦，同时，我的整个项目的前后端又能通过API来解耦。</p><h2 id="进一步的实现"><a href="#进一步的实现" class="headerlink" title="进一步的实现"></a>进一步的实现</h2><p>话不多说，上代码</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> APIRouter, WebSocket, WebSocketDisconnect, FastAPI</span><br><span class="line"><span class="keyword">import</span> aioredis</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span></span><br><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> asynccontextmanager</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 redis 生命时期函数</span></span><br><span class="line"><span class="meta">@asynccontextmanager</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">lifespan</span>(<span class="params">app: FastAPI</span>):</span><br><span class="line">    <span class="keyword">global</span> redis_pool</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        redis_pool = <span class="keyword">await</span> aioredis.from_url(<span class="string">&quot;redis://localhost&quot;</span>, max_connections=<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">yield</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="keyword">if</span> redis_pool:</span><br><span class="line">            <span class="keyword">await</span> redis_pool.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动FastAPI 应用实例</span></span><br><span class="line">app = FastAPI(lifespan=lifespan)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储活动连接的WebSocket</span></span><br><span class="line">active_connections: <span class="type">List</span>[WebSocket] = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 Redis 连接池</span></span><br><span class="line">redis_pool = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取 Redis 连接的辅助函数</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">get_redis</span>():</span><br><span class="line">    <span class="keyword">if</span> redis_pool <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;Redis connection pool is not initialized&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> redis_pool</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.websocket(<span class="params"><span class="string">&quot;/ws&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">websocket_endpoint</span>(<span class="params">websocket: WebSocket</span>):</span><br><span class="line">    redis = <span class="keyword">await</span> get_redis()</span><br><span class="line">    <span class="keyword">await</span> websocket.accept()</span><br><span class="line">    active_connections.append(websocket)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        file_data = <span class="string">b&quot;&quot;</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            data = <span class="keyword">await</span> websocket.receive_bytes()  <span class="comment"># 接收二进制数据</span></span><br><span class="line">            <span class="keyword">if</span> data == <span class="string">b&quot;file_complete&quot;</span>:  <span class="comment"># 假设文件传输完成时发送 &quot;file_complete&quot;</span></span><br><span class="line">                <span class="comment"># 文件传输完成</span></span><br><span class="line">                <span class="keyword">await</span> websocket.send_text(<span class="string">&quot;File transfer complete&quot;</span>)</span><br><span class="line">                <span class="comment"># 将处理后的文件数据存储到 Redis</span></span><br><span class="line">                <span class="keyword">await</span> redis.<span class="built_in">set</span>(<span class="string">&quot;raw_file&quot;</span>, file_data)</span><br><span class="line">                <span class="keyword">await</span> websocket.send_text(<span class="string">&quot;Ready for next task&quot;</span>)</span><br><span class="line">                </span><br><span class="line">                <span class="comment"># 等待文件 B 处理数据</span></span><br><span class="line">                pubsub = redis.pubsub()</span><br><span class="line">                <span class="keyword">await</span> pubsub.subscribe(<span class="string">&quot;processed_data_ready&quot;</span>)</span><br><span class="line">                <span class="keyword">async</span> <span class="keyword">for</span> message <span class="keyword">in</span> pubsub.listen():</span><br><span class="line">                    <span class="keyword">if</span> message[<span class="string">&quot;type&quot;</span>] == <span class="string">&quot;message&quot;</span>:</span><br><span class="line">                        <span class="comment"># 从 Redis 中读取处理后的数据</span></span><br><span class="line">                        processed_data = <span class="keyword">await</span> redis.get(<span class="string">&quot;processed_file&quot;</span>)</span><br><span class="line">                        <span class="keyword">await</span> websocket.send_text(<span class="string">f&quot;Processed data: <span class="subst">&#123;processed_data.decode(<span class="string">&#x27;utf-8&#x27;</span>)&#125;</span>&quot;</span>)</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                <span class="comment"># 重置 file_data 以接收下一波数据</span></span><br><span class="line">                file_data = <span class="string">b&quot;&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 处理文件数据块</span></span><br><span class="line">                file_data += data</span><br><span class="line">                <span class="keyword">await</span> websocket.send_text(<span class="string">&quot;File chunk received&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> WebSocketDisconnect:</span><br><span class="line">        active_connections.remove(websocket)</span><br><span class="line">        <span class="keyword">await</span> websocket.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="comment"># 建议在 finally 块中确保连接移除</span></span><br><span class="line">        <span class="keyword">if</span> websocket <span class="keyword">in</span> active_connections:</span><br><span class="line">            active_connections.remove(websocket)</span><br></pre></td></tr></table></figure><p>我在这个文件中，启动了redis服务，并且定义了API。之后运行这个文件，API接受到的数据就会向内存里传输，同时我的主程序就可以读取redis 内存库中的数据，并将这个数据进行处理，处理后发送回redis。API代码逻辑出读取到主程序文件返回的数据，再将数据发送回去</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> softwares </category>
+          
+          <category> software engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> software </tag>
+            
+            <tag> API </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> websocket </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>FastAPI基础以及进阶使用-1</title>
+      <link href="/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/"/>
+      <url>/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="初识API"><a href="#初识API" class="headerlink" title="初识API"></a>初识API</h2><p>API，就是定义了一个外接可以与你设计的程序，进行互动的接口。我们之所以需要API，从产品的设计上讲，一个最大的用处是前后端解耦。想象一下，你设计了一个产品，同时在开发前后端。如果前后端直接一套程序，一块设计，那么代码之间必然是粘合在一块的。假设前端想要改进他的代码，那就不得不考虑会不会对后端造成影响，大大降低了开发效率以及产品的稳定。另一方面，前后端的技术栈是完全不一样的，让他们在一套程序中协调运行，也大大提高了编写程序的难度。如果，我们让前端和后端独立运行，仅要求前后端通过api来通信，那么前端和后端任何改动都不会影响对方，只需要保证通过api发送的数据无误即可</p><h2 id="使用FastAPI构建Python项目"><a href="#使用FastAPI构建Python项目" class="headerlink" title="使用FastAPI构建Python项目"></a>使用FastAPI构建Python项目</h2><h3 id="1-选择FastAPI"><a href="#1-选择FastAPI" class="headerlink" title="1. 选择FastAPI"></a>1. 选择FastAPI</h3><p>FastAPI，说白了就是一个用于构建api的框架，可以方便的开发api接口。相比其他的api开发框架，FastAPI效率更高，且语法简洁，非常适合设计构建现代api服务</p><h3 id="2-为项目安装FastAPI"><a href="#2-为项目安装FastAPI" class="headerlink" title="2. 为项目安装FastAPI"></a>2. 为项目安装FastAPI</h3><p>FastAPI主要是为python设计，我们可以再python项目中方便的调用它。</p><p>首先，需要在项目中部署FastAPI库</p><p>在本项目的终端中运行以下代码（要求Python 3.7 及以上版本）</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fastapi uvicorn</span><br></pre></td></tr></table></figure><p>注意，unicorn是用于运行 FastAPI 的 ASGI 服务器，为了方便后续测试，我建议将其安装</p><h3 id="3-在程序中构建FastAPI"><a href="#3-在程序中构建FastAPI" class="headerlink" title="3. 在程序中构建FastAPI"></a>3. 在程序中构建FastAPI</h3><p>首先，先看看最基础的代码构建</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 FastAPI 应用实例</span></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义根路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">read_root</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;Hello, World!&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义带路径参数的路由</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/items/&#123;item_id&#125;&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">read_item</span>(<span class="params">item_id: <span class="built_in">int</span>, q: <span class="built_in">str</span> = <span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;item_id&quot;</span>: item_id, <span class="string">&quot;q&quot;</span>: q&#125;</span><br></pre></td></tr></table></figure><p>在终端中进入刚才创建脚本的根目录，运行</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uvicorn main:app <span class="literal">--reload</span></span><br></pre></td></tr></table></figure><p>此时，FastAPI服务就已经启动</p><p>启动成功后，在浏览器中访问以下 URL：</p><ul><li>根路径：<code>http://127.0.0.1:8000/</code>，返回 <code>&#123;&quot;message&quot;: &quot;Hello, World!&quot;&#125;</code>。</li><li>带路径参数的路由：<code>http://127.0.0.1:8000/items/42?q=test</code>，返回 <code>&#123;&quot;item_id&quot;: 42, &quot;q&quot;: &quot;test&quot;&#125;</code>。</li></ul><p>FastAPI 会自动生成交互式 API 文档，可以通过以下 URL 访问：</p><ul><li>Swagger UI: <a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a></li><li>ReDoc: <a href="http://127.0.0.1:8000/redoc">http://127.0.0.1:8000/redoc</a></li></ul><p>是否对代码一头雾水？让我们详细解析</p><h3 id="4-解析代码"><a href="#4-解析代码" class="headerlink" title="4. 解析代码"></a>4. 解析代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app = FastAPI()</span><br></pre></td></tr></table></figure><p>这段语法将FastAPI实例化，相当于我们现在定义的这个api服务，就是app了。一般来说，定义API时都要写上这个语句</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br></pre></td></tr></table></figure><p><code>@app.get(&quot;/&quot;)</code> 是一个<strong>路由装饰器</strong>，用于定义如何处理 HTTP GET 请求。这里不讲解装饰器是什么，只要知道，这个语句写上后，就相当于定义好了如何处理HTTP GET 请求的函数，不需要我们对着HEEP GET 请求的格式自己构建代码。（）中接受的参数，可以来定URL 路径。别人的程序想要访问我们的API，就需要在URL中添加这个路径来访问。</p><p>不同的URL路径，对应的是不同的<strong>资源</strong>。在FastAPI中，资源是一个核心概念，指的是通过 API 暴露给客户端的任何实体或数据。资源可以是任何可以被标识、操作和管理的对象，例如用户、商品、订单等。也许定义会让人觉得有些抽象，我觉得，不同URL路径可以理解为定义不同数据处理逻辑的多个接口。（当然，这个理解兴许是不准确的）</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">read_root</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;Hello, World!&quot;</span>&#125;</span><br></pre></td></tr></table></figure><p>这段代码定义了该API的视图函数。在 FastAPI 中，<strong>视图函数</strong>（View Function）是指与特定路由绑定、用于处理客户端请求并返回响应的 Python 函数。视图函数是 FastAPI 应用的核心组成部分，负责实现具体的业务逻辑。在这个函数下，你可以写逻辑代码来处理你接受的数据，并返回</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> softwares </category>
+          
+          <category> software engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> software </tag>
+            
+            <tag> API </tag>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>短期计划</title>
+      <link href="/2025/03/18/Agno%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/"/>
+      <url>/2025/03/18/Agno%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="目标明确"><a href="#目标明确" class="headerlink" title="目标明确"></a>目标明确</h2><p>我需要做出的是一个虚拟Vtuber，所以我应当重点关注多模态模型，以及team。当然，所有的信息都是必要的，创建虚拟Vtuber</p><p>远远比我想象的要复杂，但是，这就是我所期望的！</p><h2 id="放弃旧项目"><a href="#放弃旧项目" class="headerlink" title="放弃旧项目"></a>放弃旧项目</h2><p>之前在unity做的项目，所有的代码都在unity中实现（天知道当时我是怎么度过来的！）后面才发现这样做有多不合适。首先，c#中专精ai相关的库远不如python中丰富，同时，大多数agent框架也是基于python的。更何况，将代码编写在unity中，增加了耦合度，无法更换前端（我要是想做一个web端那该咋办）so，使用python重构ai模型逻辑，成为了我现在最需要做的事情</p><h2 id="新计划！"><a href="#新计划！" class="headerlink" title="新计划！"></a>新计划！</h2><p>首先，我需要将之前的Asr+llm+TTS 用python在后端重构，使用的agent框架待定为Agno，通过这种方式熟悉新框架，也是一种尝试。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> softwares </category>
+          
+          <category> AI </category>
+          
+          <category> Agno </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> Agno </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>初试Agno，以及踩坑记录</title>
+      <link href="/2025/03/18/%E5%88%9D%E8%AF%95Agno/"/>
+      <url>/2025/03/18/%E5%88%9D%E8%AF%95Agno/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Agno是什么"><a href="#Agno是什么" class="headerlink" title="Agno是什么"></a>Agno是什么</h2><p>Agno是一个用来创建agent的开源框架，近期在github中较为火热，star数增长较快</p><p>Agno主要是以python语言作为基础的框架，所以需要人对python较为熟悉</p><h2 id="Agno文档初探"><a href="#Agno文档初探" class="headerlink" title="Agno文档初探"></a>Agno文档初探</h2><p>Agno文档较为详细，它甚至将ai嵌入在了文档中，用户可以通过与Agno文档中的AI交互，快速解决实践中的问题</p><h2 id="Agno踩坑记录–废弃"><a href="#Agno踩坑记录–废弃" class="headerlink" title="Agno踩坑记录–废弃"></a>Agno踩坑记录–废弃</h2><p><del>在使用Agno创建最简单的agent时，我使用阿里百炼平台提供的qwen模型，通过openai兼容接口接入Agno框架，但是一直存在报错，报错信息显示Agno框架向阿里的服务器发送的请求不符合open api格式。随后尝试使用Agno原生支持的deepseek接口，成功调用阿里平台大模型。猜测是原生openai接口存在新特性，Agno使用新特性，导致部分厂商的openai兼容接口失效。这仅仅是猜测，我并没有对此进行考证</del></p><p>实际上是我的类找错了，错怪Agno了hh</p><h2 id="Agno使用心得"><a href="#Agno使用心得" class="headerlink" title="Agno使用心得"></a>Agno使用心得</h2><p>基本把Agno的官方文档扫了一遍。最大的感受是，Agno把一些常见的功能封装（这也是大多数agent所做的），但是对于运行逻辑本身，并没有过多的封装，而是依赖python本身的代码去编写</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> softwares </category>
+          
+          <category> AI </category>
+          
+          <category> Agno </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> Agno </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

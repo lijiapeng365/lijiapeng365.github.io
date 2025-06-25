@@ -1,0 +1,38 @@
+/* 文章卡片和侧边栏毛玻璃效果 */
+.card-widget,
+.recent-posts .article-container,
+#recent-posts > .recent-post-item,
+.recent-posts .recent-post-item,
+div#recent-posts > div.recent-post-item {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+}
+
+/* 深色模式适配 */
+[data-theme='dark'] .card-widget,
+[data-theme='dark'] .recent-posts .article-container,
+[data-theme='dark'] #recent-posts > .recent-post-item,
+[data-theme='dark'] .recent-posts .recent-post-item,
+[data-theme='dark'] div#recent-posts > div.recent-post-item {
+  background: rgba(30, 30, 30, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 设置默认顶部图片完全透明 */
+#page-header {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+#page-header.not-home-page {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+#page-header::before {
+  background-color: transparent !important;
+  background-image: none !important;
+}

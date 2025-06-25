@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>FastAPI基础以及进阶使用-1 | himbro的小屋</title><meta name="author" content="himbro"><meta name="copyright" content="himbro"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="初识APIAPI，就是定义了一个外接可以与你设计的程序，进行互动的接口。我们之所以需要API，从产品的设计上讲，一个最大的用处是前后端解耦。想象一下，你设计了一个产品，同时在开发前后端。如果前后端直接一套程序，一块设计，那么代码之间必然是粘合在一块的。假设前端想要改进他的代码，那就不得不考虑会不会对后端造成影响，大大降低了开发效率以及产品的稳定。另一方面，前后端的技术栈是完全不一样的，让他们在一套">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FastAPI基础以及进阶使用-1">
+<meta property="og:url" content="http://example.com/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/index.html">
+<meta property="og:site_name" content="himbro的小屋">
+<meta property="og:description" content="初识APIAPI，就是定义了一个外接可以与你设计的程序，进行互动的接口。我们之所以需要API，从产品的设计上讲，一个最大的用处是前后端解耦。想象一下，你设计了一个产品，同时在开发前后端。如果前后端直接一套程序，一块设计，那么代码之间必然是粘合在一块的。假设前端想要改进他的代码，那就不得不考虑会不会对后端造成影响，大大降低了开发效率以及产品的稳定。另一方面，前后端的技术栈是完全不一样的，让他们在一套">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/logo.jpg">
+<meta property="article:published_time" content="2025-03-19T04:54:48.000Z">
+<meta property="article:modified_time" content="2025-03-19T06:11:58.870Z">
+<meta property="article:author" content="himbro">
+<meta property="article:tag" content="software">
+<meta property="article:tag" content="API">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/logo.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FastAPI基础以及进阶使用-1",
+  "url": "http://example.com/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/",
+  "image": "http://example.com/img/logo.jpg",
+  "datePublished": "2025-03-19T04:54:48.000Z",
+  "dateModified": "2025-03-19T06:11:58.870Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "himbro",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'FastAPI基础以及进阶使用-1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/girl_in_rain.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.jpg" alt="Logo"><span class="site-name">himbro的小屋</span></a><a class="nav-page-title" href="/"><span class="site-name">FastAPI基础以及进阶使用-1</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">FastAPI基础以及进阶使用-1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-19T04:54:48.000Z" title="发表于 2025-03-19 12:54:48">2025-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-19T06:11:58.870Z" title="更新于 2025-03-19 14:11:58">2025-03-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/softwares/">softwares</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/softwares/software-engineering/">software engineering</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="初识API"><a href="#初识API" class="headerlink" title="初识API"></a>初识API</h2><p>API，就是定义了一个外接可以与你设计的程序，进行互动的接口。我们之所以需要API，从产品的设计上讲，一个最大的用处是前后端解耦。想象一下，你设计了一个产品，同时在开发前后端。如果前后端直接一套程序，一块设计，那么代码之间必然是粘合在一块的。假设前端想要改进他的代码，那就不得不考虑会不会对后端造成影响，大大降低了开发效率以及产品的稳定。另一方面，前后端的技术栈是完全不一样的，让他们在一套程序中协调运行，也大大提高了编写程序的难度。如果，我们让前端和后端独立运行，仅要求前后端通过api来通信，那么前端和后端任何改动都不会影响对方，只需要保证通过api发送的数据无误即可</p>
+<h2 id="使用FastAPI构建Python项目"><a href="#使用FastAPI构建Python项目" class="headerlink" title="使用FastAPI构建Python项目"></a>使用FastAPI构建Python项目</h2><h3 id="1-选择FastAPI"><a href="#1-选择FastAPI" class="headerlink" title="1. 选择FastAPI"></a>1. 选择FastAPI</h3><p>FastAPI，说白了就是一个用于构建api的框架，可以方便的开发api接口。相比其他的api开发框架，FastAPI效率更高，且语法简洁，非常适合设计构建现代api服务</p>
+<h3 id="2-为项目安装FastAPI"><a href="#2-为项目安装FastAPI" class="headerlink" title="2. 为项目安装FastAPI"></a>2. 为项目安装FastAPI</h3><p>FastAPI主要是为python设计，我们可以再python项目中方便的调用它。</p>
+<p>首先，需要在项目中部署FastAPI库</p>
+<p>在本项目的终端中运行以下代码（要求Python 3.7 及以上版本）</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fastapi uvicorn</span><br></pre></td></tr></table></figure>
+
+<p>注意，unicorn是用于运行 FastAPI 的 ASGI 服务器，为了方便后续测试，我建议将其安装</p>
+<h3 id="3-在程序中构建FastAPI"><a href="#3-在程序中构建FastAPI" class="headerlink" title="3. 在程序中构建FastAPI"></a>3. 在程序中构建FastAPI</h3><p>首先，先看看最基础的代码构建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 FastAPI 应用实例</span></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义根路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">read_root</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;Hello, World!&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义带路径参数的路由</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/items/&#123;item_id&#125;&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">read_item</span>(<span class="params">item_id: <span class="built_in">int</span>, q: <span class="built_in">str</span> = <span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;item_id&quot;</span>: item_id, <span class="string">&quot;q&quot;</span>: q&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在终端中进入刚才创建脚本的根目录，运行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uvicorn main:app <span class="literal">--reload</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，FastAPI服务就已经启动</p>
+<p>启动成功后，在浏览器中访问以下 URL：</p>
+<ul>
+<li>根路径：<code>http://127.0.0.1:8000/</code>，返回 <code>&#123;&quot;message&quot;: &quot;Hello, World!&quot;&#125;</code>。</li>
+<li>带路径参数的路由：<code>http://127.0.0.1:8000/items/42?q=test</code>，返回 <code>&#123;&quot;item_id&quot;: 42, &quot;q&quot;: &quot;test&quot;&#125;</code>。</li>
+</ul>
+<p>FastAPI 会自动生成交互式 API 文档，可以通过以下 URL 访问：</p>
+<ul>
+<li>Swagger UI: <a target="_blank" rel="noopener" href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a></li>
+<li>ReDoc: <a target="_blank" rel="noopener" href="http://127.0.0.1:8000/redoc">http://127.0.0.1:8000/redoc</a></li>
+</ul>
+<p>是否对代码一头雾水？让我们详细解析</p>
+<h3 id="4-解析代码"><a href="#4-解析代码" class="headerlink" title="4. 解析代码"></a>4. 解析代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app = FastAPI()</span><br></pre></td></tr></table></figure>
+
+<p>这段语法将FastAPI实例化，相当于我们现在定义的这个api服务，就是app了。一般来说，定义API时都要写上这个语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br></pre></td></tr></table></figure>
+
+<p><code>@app.get(&quot;/&quot;)</code> 是一个<strong>路由装饰器</strong>，用于定义如何处理 HTTP GET 请求。这里不讲解装饰器是什么，只要知道，这个语句写上后，就相当于定义好了如何处理HTTP GET 请求的函数，不需要我们对着HEEP GET 请求的格式自己构建代码。（）中接受的参数，可以来定URL 路径。别人的程序想要访问我们的API，就需要在URL中添加这个路径来访问。</p>
+<p>不同的URL路径，对应的是不同的<strong>资源</strong>。在FastAPI中，资源是一个核心概念，指的是通过 API 暴露给客户端的任何实体或数据。资源可以是任何可以被标识、操作和管理的对象，例如用户、商品、订单等。也许定义会让人觉得有些抽象，我觉得，不同URL路径可以理解为定义不同数据处理逻辑的多个接口。（当然，这个理解兴许是不准确的）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">read_root</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;Hello, World!&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码定义了该API的视图函数。在 FastAPI 中，<strong>视图函数</strong>（View Function）是指与特定路由绑定、用于处理客户端请求并返回响应的 Python 函数。视图函数是 FastAPI 应用的核心组成部分，负责实现具体的业务逻辑。在这个函数下，你可以写逻辑代码来处理你接受的数据，并返回</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">himbro</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/">http://example.com/2025/03/19/FastAPI%E5%9F%BA%E7%A1%80%E4%BB%A5%E5%8F%8A%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">himbro的小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/software/">software</a><a class="post-meta__tags" href="/tags/API/">API</a><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post-share"><div class="social-share" data-image="/img/logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/18/Agno%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/" title="短期计划"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">短期计划</div></div><div class="info-2"><div class="info-item-1">目标明确我需要做出的是一个虚拟Vtuber，所以我应当重点关注多模态模型，以及team。当然，所有的信息都是必要的，创建虚拟Vtuber 远远比我想象的要复杂，但是，这就是我所期望的！ 放弃旧项目之前在unity做的项目，所有的代码都在unity中实现（天知道当时我是怎么度过来的！）后面才发现这样做有多不合适。首先，c#中专精ai相关的库远不如python中丰富，同时，大多数agent框架也是基于python的。更何况，将代码编写在unity中，增加了耦合度，无法更换前端（我要是想做一个web端那该咋办）so，使用python重构ai模型逻辑，成为了我现在最需要做的事情 新计划！首先，我需要将之前的Asr+llm+TTS 用python在后端重构，使用的agent框架待定为Agno，通过这种方式熟悉新框架，也是一种尝试。 </div></div></div></a><a class="pagination-related" href="/2025/03/20/FastAPI%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0-2%EF%BC%88Websocket%E5%AE%9E%E7%8E%B0%EF%BC%89/" title="FastAPI使用日记-2（Websocket实现）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">FastAPI使用日记-2（Websocket实现）</div></div><div class="info-2"><div class="info-item-1">FastAPI的曲折之路FastAPI支持多种传输数据的方式，其中有http响应，以及websocket等等…最开始，我使用的是http模式，直接@app.get 来定义FastAPI接口。我发现，这种模式要求的是，前端发送消息，后端收取消息并响应。我在定义的时候，发现了这种模式在我项目中的局限性。 首先，我的主程序和FastAPI不好解耦，程序逻辑都是写在定义api的语句中，让我后续扩展维护程序带来相当多的麻烦。其次，我无法实现程序与客户端的持续性互动，因为http模式的输入-输出，导致我要固定住处理数据的逻辑，并且只有前端发来数据时，我才能返回数据。 尽管，我找到了一些改进的方法，就是使用FastAPI的依赖注入功能（简单来说，就是API可以定义在一个文件中，然后另一个文件可以通过特定语句导入它，实现api和业务的分离）。但是，前端发送信息，后端就要响应信息这一底层逻辑没有变，使得前后端仍然...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/03/20/FastAPI%E4%BD%BF%E7%94%A8%E6%97%A5%E8%AE%B0-2%EF%BC%88Websocket%E5%AE%9E%E7%8E%B0%EF%BC%89/" title="FastAPI使用日记-2（Websocket实现）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-20</div><div class="info-item-2">FastAPI使用日记-2（Websocket实现）</div></div><div class="info-2"><div class="info-item-1">FastAPI的曲折之路FastAPI支持多种传输数据的方式，其中有http响应，以及websocket等等…最开始，我使用的是http模式，直接@app.get 来定义FastAPI接口。我发现，这种模式要求的是，前端发送消息，后端收取消息并响应。我在定义的时候，发现了这种模式在我项目中的局限性。 首先，我的主程序和FastAPI不好解耦，程序逻辑都是写在定义api的语句中，让我后续扩展维护程序带来相当多的麻烦。其次，我无法实现程序与客户端的持续性互动，因为http模式的输入-输出，导致我要固定住处理数据的逻辑，并且只有前端发来数据时，我才能返回数据。 尽管，我找到了一些改进的方法，就是使用FastAPI的依赖注入功能（简单来说，就是API可以定义在一个文件中，然后另一个文件可以通过特定语句导入它，实现api和业务的分离）。但是，前端发送信息，后端就要响应信息这一底层逻辑没有变，使得前后端仍然...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">himbro</div><div class="author-info-description">开源万岁</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lijiapeng365"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E8%AF%86API"><span class="toc-number">1.</span> <span class="toc-text">初识API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8FastAPI%E6%9E%84%E5%BB%BAPython%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">使用FastAPI构建Python项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%80%89%E6%8B%A9FastAPI"><span class="toc-number">2.1.</span> <span class="toc-text">1. 选择FastAPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%BA%E9%A1%B9%E7%9B%AE%E5%AE%89%E8%A3%85FastAPI"><span class="toc-number">2.2.</span> <span class="toc-text">2. 为项目安装FastAPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%9E%84%E5%BB%BAFastAPI"><span class="toc-number">2.3.</span> <span class="toc-text">3. 在程序中构建FastAPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%A7%A3%E6%9E%90%E4%BB%A3%E7%A0%81"><span class="toc-number">2.4.</span> <span class="toc-text">4. 解析代码</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/25/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%ADwindows11%E5%AE%B6%E5%BA%AD%E7%89%88%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8%E6%80%A7/" title="如何关闭windows11家庭版hyper-v以及虚拟化安全性">如何关闭windows11家庭版hyper-v以及虚拟化安全性</a><time datetime="2025-06-25T00:39:06.000Z" title="发表于 2025-06-25 08:39:06">2025-06-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/24/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5NAT%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" title="VMware虚拟机无法连接NAT网络模式">VMware虚拟机无法连接NAT网络模式</a><time datetime="2025-06-24T12:22:41.000Z" title="发表于 2025-06-24 20:22:41">2025-06-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/26/docker%E5%AE%B9%E5%99%A8%E5%9C%A8windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D-b73873adc5/" title="Docker在Windows平台的部署及使用">Docker在Windows平台的部署及使用</a><time datetime="2025-04-26T07:41:34.000Z" title="发表于 2025-04-26 15:41:34">2025-04-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/23/%E5%89%8D%E7%AB%AFAI%E7%94%9F%E6%88%90%E5%BF%83%E5%BE%97/" title="前端AI生成心得">前端AI生成心得</a><time datetime="2025-04-23T05:35:13.000Z" title="发表于 2025-04-23 13:35:13">2025-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/28/%E4%BB%A4%E4%BA%BA%E8%B4%B9%E8%A7%A3%E7%9A%84%E7%BF%BB%E8%AF%91-1/" title="令人费解的翻译-1">令人费解的翻译-1</a><time datetime="2025-03-28T13:00:56.000Z" title="发表于 2025-03-28 21:00:56">2025-03-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By himbro</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
